@@ -67,37 +67,73 @@ public class Main {
 		int option = sc.nextInt();
 		chosenRocket = rockets.get(option-1);
 		//SI ÉS LA PRIMERA VEGADA QUE ES TRIA L'OPCIÓ, EXECUTA START
-		vegades[option-1]++;
-		if (vegades[option-1]==1) {
-			for (int i=0; i<chosenRocket.getThrusters().size(); i++) {
-				chosenRocket.getThrusters().get(i).start();
-			}
-			
-		}
 		
-		
+			/*
+			 * vegades[option-1]++; if (vegades[option-1]==1) { for (int i=0;
+			 * i<chosenRocket.getThrusters().size(); i++) {
+			 * chosenRocket.getThrusters().get(i).start(); }
+			 * 
+			 * }
+			 */
 		
 		System.out.println("Escull una opció");
 		System.out.println("1. Accelera");
 		System.out.println("2. Desaccelera");
 		
+		
+		
 		int accelerar = sc.nextInt();
 		
-		//for (int i=0; i<chosenRocket.getThrusters().size() ; i++) {
-			if (accelerar == 1) {
-				
-				//chosenRocket.getThrusters().get(i).setAccelera(true);
-				chosenRocket.accelera(chosenRocket.getThrusters());
-				
-			} else {
-				//chosenRocket.getThrusters().get(i).setAccelera(false);
-				chosenRocket.desaccelera(chosenRocket.getThrusters());
-			}
-		//	if (firstTime == true) {
-		//	rockets.get(option-1).getThrusters().get(i).start();
-		//	firstTime = false;
-		//	}
-		//}
+		
+		
+
+			 
+			  
+			  
+			 
+			 if (accelerar == 1) {
+				 chosenRocket.accelera(chosenRocket.getThrusters());
+				//SI ÉS LA PRIMERA VEGADA QUE S'ACCELERA EL COET, EXECUTA START
+					
+					vegades[option-1]++;
+					   
+						for (int i=0; i<chosenRocket.getThrusters().size(); i++) {
+							if (vegades[option-1]==1) {
+							chosenRocket.getThrusters().get(i).start();
+							System.out.println(chosenRocket.getThrusters().get(i).isAlive());
+							}
+						}
+						
+						
+						// ****TAMBE QUAN HEM DEIXAT A 0 I TORNEM A REACCELERAR
+						
+					
+			  
+			  
+			  } else { 
+				  //DESACCELERAR
+				  
+				  //SI HEM ARRIBAT AL TOPE DEL PROPULSOR I BAIXEM, CREA NOU FIL
+				 for (int i=0; i<chosenRocket.getThrusters().size(); i++) {
+						if (chosenRocket.getThrusters().get(i).getCurrentPower() == chosenRocket.getThrusters().get(i).getMaxPower()) {
+						
+						System.out.println(chosenRocket.getThrusters().get(i).isAlive());
+						System.out.println(chosenRocket.getThrusters().get(i).getName());
+		
+						//	System.out.println("Aquí hauríem de crear fil de nou, però dona error");
+						} else {
+							System.out.println(chosenRocket.getThrusters().get(i).isAlive());
+							
+						
+						}
+				}
+				  
+				  //crida al metode desaccelerar
+				  chosenRocket.desaccelera(chosenRocket.getThrusters()); 
+		
+			  }
+			
+
 		
 	}
 		

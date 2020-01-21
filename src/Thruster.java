@@ -63,8 +63,7 @@ public class Thruster extends Thread {
 
 
 
-	public void run()  
-	{    
+	
 		//	for (int i=0 ; i<) {
 
 	
@@ -78,8 +77,54 @@ public class Thruster extends Thread {
 		 * setCurrentPower(currentPower-=5); } else { return; } }
 		 */
 
-	}
+
+	
+	 volatile boolean finished = false;
+
+	  public void stopMe()
+	  {
+	    finished = true;
+	    System.out.println("Matat el fil "+Thread.currentThread().getName());
+	   // System.out.println(Thread.currentThread().isAlive());
+	  }
+
+	  public void run()
+	  {
+		  
+		  
+		  System.out.println("Creat el fil "+Thread.currentThread().getName());
+		  
+	    while (!finished) {
+	    	try {
+				sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	if (currentPower == maxPower || currentPower == 0) {
+		stopMe();
+				/*
+				 * try { sleep(10000000); } catch (InterruptedException e) { // TODO
+				 * Auto-generated catch block e.printStackTrace(); }
+				 */
+	    //		try {
+		//			wait();
+		//		} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+		//			e.printStackTrace();
+		//		}
+		//	}
+			
+	    }
+	    //System.out.println("Matat el fil "+Thread.currentThread().getName());
+	       
+	    }
+	    
+	    
+	    
+	  }
+}
 
 	//}    
 
-}
+

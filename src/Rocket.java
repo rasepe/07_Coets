@@ -47,13 +47,19 @@ public void setMaxPowers(List<Integer> maxPowers) {
 
 public void accelera(List<Thruster> thrusters) {
 	for (int i=0; i<thrusters.size(); i++) {
+			
+			if (thrusters.get(i).getCurrentPower() != thrusters.get(i).getMaxPower()) {
+		
 		thrusters.get(i).setCurrentPower(thrusters.get(i).getCurrentPower()+5);
+		} 
 	}
 }
 
 public void desaccelera(List<Thruster> thrusters) {
 	for (int i=0; i<thrusters.size(); i++) {
+		if (thrusters.get(i).getCurrentPower() > 0) {
 		thrusters.get(i).setCurrentPower(thrusters.get(i).getCurrentPower()-5);
+		}
 	}
 }
 
