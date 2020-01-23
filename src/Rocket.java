@@ -3,18 +3,18 @@ import java.util.List;
 
 public class Rocket {
 String code;
-int thrustersAmount;
+//int thrustersAmount;
 List<Thruster> thrusters = new ArrayList<Thruster>();
 List<Integer> maxPowers = new ArrayList<Integer>();
-//int comptador = 0;
-public Rocket(String code, int thrustersAmount, List<Integer> maxPowers) {
+int comptador = 0;
+public Rocket(String code, List<Integer> maxPowers) {
 	super();
 	this.code = code;
-	this.thrustersAmount = thrustersAmount;
+//	this.thrustersAmount = thrustersAmount;
 	this.maxPowers = maxPowers;
-	for (int i = 0; i<thrustersAmount; i++) {
+	for (int i = 0; i<maxPowers.size(); i++) {
 		//(new Thruster(maxPowers.get(i))).start();
-		Thruster thruster = new Thruster(maxPowers.get(i));
+		Thruster thruster = new Thruster(maxPowers.get(i), this);
 		//thruster.start();
 		thrusters.add(thruster);
 	}
@@ -26,12 +26,13 @@ public String getCode() {
 public void setCode(String code) {
 	this.code = code;
 }
-public int getThrustersAmount() {
-	return thrustersAmount;
-}
-public void setThrustersAmount(int thrustersAmount) {
-	this.thrustersAmount = thrustersAmount;
-}
+
+	/*
+	 * public int getThrustersAmount() { return thrustersAmount; } public void
+	 * setThrustersAmount(int thrustersAmount) { this.thrustersAmount =
+	 * thrustersAmount;
+	 
+} */
 public List<Thruster> getThrusters() {
 	return thrusters;
 }
@@ -45,14 +46,85 @@ public void setMaxPowers(List<Integer> maxPowers) {
 	this.maxPowers = maxPowers;
 }
 
-public void accelera(List<Thruster> thrusters) {
+public void accelera(List<Thruster> thrusters, List<Integer> potenciesObjectiu) {
+		/*
+		 * for (int i=0; i<thrusters.size(); i++) {
+		 * 
+		 * if (thrusters.get(i).getCurrentPower() != thrusters.get(i).getMaxPower()) {
+		 * 
+		 * thrusters.get(i).setCurrentPower(thrusters.get(i).getCurrentPower()+5); } }
+		 */
+	//
+	
 	for (int i=0; i<thrusters.size(); i++) {
-			
-			if (thrusters.get(i).getCurrentPower() != thrusters.get(i).getMaxPower()) {
+		//obre el fil si és el primer cop que accelerem el coet
+		if (comptador == 0) {
+		thrusters.get(i).start();
+		}
+		for (int j=thrusters.get(i).getCurrentPower() ; j<potenciesObjectiu.get(i); j++) {
+			try {
+				//thrusters.get(i);
+				Thruster.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			thrusters.get(i).setCurrentPower(thrusters.get(i).getCurrentPower()+1);
+			Main.printRocket(this);
+		}
 		
-		thrusters.get(i).setCurrentPower(thrusters.get(i).getCurrentPower()+5);
-		} 
 	}
+	comptador++;
+	
+}
+
+	/* public void accelera(List<Integer> potenciesObjectiu) { */
+	/*
+	 * for (int i=0; i<thrusters.size(); i++) {
+	 * 
+	 * if (thrusters.get(i).getCurrentPower() != thrusters.get(i).getMaxPower()) {
+	 * 
+	 * thrusters.get(i).setCurrentPower(thrusters.get(i).getCurrentPower()+5); } }
+	 */
+//
+
+	
+	
+	
+	/*
+	 * for (int i=0; i<thrusters.size(); i++) { //obre el fil si és el primer cop
+	 * que accelerem el coet if (comptador == 0) { thrusters.get(i).start(); } for
+	 * (int j=thrusters.get(i).getCurrentPower() ; j<potenciesObjectiu.get(i); j++)
+	 * { try { //thrusters.get(i); Thruster.sleep(500); } catch
+	 * (InterruptedException e) { // TODO Auto-generated catch block
+	 * e.printStackTrace(); }
+	 * thrusters.get(i).setCurrentPower(thrusters.get(i).getCurrentPower()+1);
+	 * Main.printRocket(this); }
+	 * 
+	 * } comptador++;
+	 * 
+	 * }
+	 */
+
+public void accelera() {
+	
+	for (int i=0; i<thrusters.size(); i++) {
+		if (comptador == 0) {
+		thrusters.get(i).start();
+		}
+		try {
+			Thruster.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//thrusters.get(i).interrupt();
+	
+
+	}
+	comptador++;
+	//Main.printRocket(this);
 }
 
 public void desaccelera(List<Thruster> thrusters) {
