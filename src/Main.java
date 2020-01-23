@@ -7,6 +7,7 @@ public class Main {
 	public static void main(String[] args) { 
 		Scanner sc = new Scanner(System.in);
 		List<Rocket> rockets = new ArrayList<Rocket>();
+		int counter = 0;
 		/*
 		 * Realitza els següents passos:
 		 * 
@@ -56,7 +57,7 @@ public class Main {
 		Rocket chosenRocket;
 		int[] vegades = new int[rockets.size()];
 		
-		List<Integer> potenciesObjectiu = new ArrayList<Integer>();
+		//List<Integer> desiredPowers = new ArrayList<Integer>();
 		
 		
 		
@@ -68,7 +69,19 @@ public class Main {
 		
 	while (!finish) {
 		
-	//	if
+
+		//PAUSA TOTS ELS PROPULSORS
+		
+			/*
+			 * for (int i=0; i<rockets.size(); i++) { for (int j=0;
+			 * j<rockets.get(i).getThrusters().size(); j++ ) {
+			 * rockets.get(i).getThrusters().get(j).pause(); }
+			 * 
+			 * 
+			 * }
+			 */
+		
+		
 		System.out.println("Escull un coet");
 		
 		for (int i=0; i<rockets.size(); i++) {
@@ -81,6 +94,10 @@ public class Main {
 		
 		int option = sc.nextInt();
 		chosenRocket = rockets.get(option-1);
+		
+		
+		
+		
 		//SI ÉS LA PRIMERA VEGADA QUE ES TRIA L'OPCIÓ, EXECUTA START
 		
 			/*
@@ -91,6 +108,17 @@ public class Main {
 			 * }
 			 */
 		sc.nextLine();
+		
+		// REACTIVA TOTS ELS PROPULSORS
+			/*
+			 * for (int i=0; i<rockets.size(); i++) { for (int j=0;
+			 * j<rockets.get(i).getThrusters().size(); j++ ) {
+			 * rockets.get(i).getThrusters().get(j).resume(); }
+			 * 
+			 * 
+			 * }
+			 */
+		
 		System.out.println("Prem intro per accelerar-desaccelerar");
 	//	System.out.println("1. Accelera");
 		//System.out.println("2. Desaccelera");
@@ -129,6 +157,12 @@ public class Main {
 			 
 			 //PREGUNTA POTENCIES OBJECTIU
 			 
+			/*
+			 * for (int j=0; j<chosenRocket.getThrusters().size(); j ++) {
+			 * chosenRocket.getThrusters().get(j).pause(); }
+			 */
+		//char arrayCaracteres[];
+		int[] desiredPowers = new int[chosenRocket.getThrusters().size()];
 			 for (int i=0; i<chosenRocket.getThrusters().size(); i ++) {
 					/*
 					 * int potenciaObjectiu; System.out.println("Potència objectiu del propulsor" +
@@ -137,15 +171,65 @@ public class Main {
 					 * potenciaObjectiu); }
 					 */
 				 int desiredPower; 
+				
+		
+			//	 }
+			
+				 try {
+ 					Thread.sleep(1000);
+ 					//Thruster.sleep(1000);
+ 				} catch (InterruptedException e) {
+ 					// TODO Auto-generated catch block
+ 					e.printStackTrace();
+ 				}
+				 
 				 System.out.println("Potència objectiu del propulsor " + (i+1) + "?"); 
+				 
 				 desiredPower = sc.nextInt(); 
+					
+				//GUARDA A ARRAY DE POTENCIES OBJECTIU;
+				 
+				 //desiredPowers.add(desiredPower);
+				// desiredPowers[i]=desiredPower;
+				 
+				 
+		
+				 
+				 
+				 
 				 chosenRocket.getThrusters().get(i).setDesiredPower(desiredPower);
+				 
+			
+			
 			 }
+			 //System.out.println(desiredPowers);
+			 //llegeix ARRAY I EXECUTA SETDESIREDPOWER
+			 
+			
+			/*
+			 * for (int i=0; i<chosenRocket.getThrusters().size(); i++) {
+			 * chosenRocket.getThrusters().get(i).setDesiredPower(desiredPowers[i]);
+			 * 
+			 * 
+			 * }
+			 */
+			 
+			 
+			 
+			/*
+			 * for (int j=0; j<chosenRocket.getThrusters().size(); j ++) {
+			 * chosenRocket.getThrusters().get(j).resume(); }
+			 */
+			 
 			// vegades[option-1]++;
 			 
 			 // CRIDA AL MÈTODE ACCELERAR
 			// chosenRocket.accelera(chosenRocket.getThrusters(),potenciesObjectiu); 
 			 chosenRocket.accelera(); 
+			 
+			 
+			 
+			 
 			 
 			 /*	} 
 				 * else { //DESACCELERAR
