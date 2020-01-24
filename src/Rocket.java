@@ -11,7 +11,7 @@ public class Rocket {
   //  int desiredSpeed;
 	int totalPotentialPower = 0;
    int totalDesiredPower;
-   int notFulfilledPower = 0;
+   int missingPower = 0;
    int totalUsedPower;
    int surplusPower;
 int objectiveSpeed;
@@ -171,34 +171,34 @@ public void setTotalDesiredPower(int totalDesiredPower) {
 	public void accelera() {
 		
 		surplusPower = 0;
-		//notFulfilledPower = 0;
+		//missingPower = 0;
 		//totalPotentialPower = 0;
 		//PUJA POTENCIA TOTAL
 		/*
-		 * while (totalDesiredPower != notFulfilledPower) { if (totalDesiredPower >
-		 * notFulfilledPower) { notFulfilledPower++; } else { // totalDesiredPower <
-		 * notFulfilledPower notFulfilledPower--; }
+		 * while (totalDesiredPower != missingPower) { if (totalDesiredPower >
+		 * missingPower) { missingPower++; } else { // totalDesiredPower <
+		 * missingPower missingPower--; }
 		 * 
 		 * }
 		 */
-		notFulfilledPower = totalDesiredPower;
+		missingPower = totalDesiredPower;
 		//REPARTEIX POTENCIA ENTRE PROPULSORS:
 		//int[] desiredPowers = new int[this.getThrusters().size()];
 		 for (int i=0; i<thrusters.size(); i ++) {
 			
 			 
 			// System.out.println("Potència objectiu del propulsor " + (i+1) + "?"); 
-			 if (notFulfilledPower >=  maxPowers.get(i)) {
+			 if (missingPower >=  maxPowers.get(i)) {
 				 this.getThrusters().get(i).setDesiredPower(maxPowers.get(i));
-				// totalUsedPower = notFulfilledPower - maxPowers.get(i);
-				 notFulfilledPower -= maxPowers.get(i);
+				// totalUsedPower = missingPower - maxPowers.get(i);
+				 missingPower -= maxPowers.get(i);
 				 
 				 if (i==thrusters.size()-1) {
-					 if (notFulfilledPower > 0) {
+					 if (missingPower > 0) {
 						
 						 System.out.println("No s'ha pogut accelerar fins la velocitat indicada per falta de potència");
 
-						 System.out.println("Ha faltat potència: " + notFulfilledPower);
+						 System.out.println("Ha faltat potència: " + missingPower);
 
 						 System.out.println("Velocitat màxima aconseguida: " + (double)Math.round(getMaximumSpeed() * 100d) / 100d);
 					 }
@@ -206,10 +206,10 @@ public void setTotalDesiredPower(int totalDesiredPower) {
 				 
 				
 			 } else {
-				 this.getThrusters().get(i).setDesiredPower(notFulfilledPower);
-				// surplusPower = notFulfilledPower;
-				surplusPower += (maxPowers.get(i)-notFulfilledPower);
-				notFulfilledPower = 0;
+				 this.getThrusters().get(i).setDesiredPower(missingPower);
+				// surplusPower = missingPower;
+				surplusPower += (maxPowers.get(i)-missingPower);
+				missingPower = 0;
 			 }
 			 
 			 
