@@ -7,7 +7,7 @@ public class Main {
 	public static void main(String[] args) { 
 		Scanner sc = new Scanner(System.in);
 		List<Rocket> rockets = new ArrayList<Rocket>();
-		int counter = 0;
+		boolean firstTime = true;
 		/*
 		 * Realitza els següents passos:
 		 * 
@@ -55,9 +55,10 @@ public class Main {
 		boolean finish = false;
 		//boolean firstTime = true;
 		Rocket chosenRocket;
-		int[] vegades = new int[rockets.size()];
+		//int[] vegades = new int[rockets.size()];
+		//int counter = 0;
 		
-		//List<Integer> desiredPowers = new ArrayList<Integer>();
+		
 		
 		
 		
@@ -80,7 +81,19 @@ public class Main {
 			 * 
 			 * }
 			 */
+		if (!firstTime) {
 		
+		try {
+			Thread.sleep(1000);
+			//Thruster.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
+		
+		//counter = 0;
+
 		
 		System.out.println("Escull un coet");
 		
@@ -107,25 +120,16 @@ public class Main {
 			 * 
 			 * }
 			 */
-		sc.nextLine();
+	//	sc.nextLine();
 		
-		// REACTIVA TOTS ELS PROPULSORS
-			/*
-			 * for (int i=0; i<rockets.size(); i++) { for (int j=0;
-			 * j<rockets.get(i).getThrusters().size(); j++ ) {
-			 * rockets.get(i).getThrusters().get(j).resume(); }
-			 * 
-			 * 
-			 * }
-			 */
+
 		
-		System.out.println("Prem intro per accelerar-desaccelerar");
-	//	System.out.println("1. Accelera");
-		//System.out.println("2. Desaccelera");
+	//	System.out.println("Prem intro per accelerar-desaccelerar");
+
 		
 		
 		
-		sc.nextLine();
+	//	sc.nextLine();
 		
 		
 		
@@ -175,32 +179,41 @@ public class Main {
 		
 			//	 }
 			
-				 try {
- 					Thread.sleep(1000);
- 					//Thruster.sleep(1000);
- 				} catch (InterruptedException e) {
- 					// TODO Auto-generated catch block
- 					e.printStackTrace();
- 				}
+//				 try {
+// 					Thread.sleep(1000);
+// 					//Thruster.sleep(1000);
+// 				} catch (InterruptedException e) {
+// 					// TODO Auto-generated catch block
+// 					e.printStackTrace();
+// 				}
 				 
 				 System.out.println("Potència objectiu del propulsor " + (i+1) + "?"); 
 				 
-				 desiredPower = sc.nextInt(); 
+				// desiredPower = sc.nextInt(); 
+				 desiredPowers[i]=sc.nextInt();
 					
 				//GUARDA A ARRAY DE POTENCIES OBJECTIU;
 				 
-				 //desiredPowers.add(desiredPower);
-				// desiredPowers[i]=desiredPower;
+				 
+
 				 
 				 
-		
+
 				 
 				 
 				 
-				 chosenRocket.getThrusters().get(i).setDesiredPower(desiredPower);
+				// chosenRocket.getThrusters().get(i).setDesiredPower(desiredPower);
 				 
 			
-			
+
+				 
+			//	 counter += chosenRocket.getThrusters().get(i).getCounter();
+				 
+			 }
+			 for (int i=0; i<chosenRocket.getThrusters().size(); i++) {
+				 for (int j=0; j<desiredPowers.length; j++) {
+					 chosenRocket.getThrusters().get(i).setDesiredPower(desiredPowers[j]);
+				}
 			 }
 			 //System.out.println(desiredPowers);
 			 //llegeix ARRAY I EXECUTA SETDESIREDPOWER
@@ -254,8 +267,7 @@ public class Main {
 				 * }
 				 */
 			
-
-		
+		firstTime = false;
 	}
 		
 
@@ -292,6 +304,12 @@ public class Main {
 
 	static void printRocket(Rocket r) {
 		//System.out.print(r.getComptador()+". ");
+		
+//		for (int i=0; i<r.getThrusters().size(); i++) {
+//			r.getThrusters().get(i).pause();
+//		}
+		
+		
 		System.out.print(r.getCode()+": ");
 
 		for (int i=0; i<r.getThrusters().size(); i++) {
@@ -310,6 +328,10 @@ public class Main {
 					  System.out.print(r.getThrusters().get(i).getMaxPower()); }
 		}
 		System.out.print("\n");
+//		for (int i=0; i<r.getThrusters().size(); i++) {
+//			r.getThrusters().get(i).resume();
+//		}
+		
 	}
 	
 	

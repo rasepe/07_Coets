@@ -115,13 +115,13 @@ public class Rocket {
 				t.start();
 				// thrusters.get(i).start();
 			}
-			try {
-				Thread.sleep(1000);
-				//Thruster.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//			try {
+//				Thread.sleep(1000);
+//				//Thruster.sleep(1000);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 
 			// thrusters.get(i).interrupt();
 

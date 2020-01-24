@@ -12,7 +12,7 @@ public class Thruster implements Runnable {
 	boolean accelera = false;
 	private Rocket currentRocket;
 	private int number;
-
+	int counter;
 	
 	public Thruster(int maxPower, Rocket currentRocket, int number) {
 		super();
@@ -68,6 +68,14 @@ public class Thruster implements Runnable {
 	 * (getCurrentPower()-5 >= 0) { //currentPower-=5;
 	 * setCurrentPower(currentPower-=5); } else { return; } }
 	 */
+
+	public int getCounter() {
+		return counter;
+	}
+
+	public void setCounter(int counter) {
+		this.counter = counter;
+	}
 
 	public int getNumber() {
 		return number;
@@ -126,8 +134,24 @@ public class Thruster implements Runnable {
     			if (currentPower < desiredPower && currentPower < maxPower) {
     				//resume();
     				currentPower++;
-    				System.out.println("ACCELERANT PROPULSOR " + number);
-    				Main.printRocket(currentRocket);
+    				
+    			//	synchronized(this) 
+    		   //     { 
+    		            // sincronitzem la impressió en pantalla
+    				//	try {
+    			//		Thread.sleep(1000);
+    					
+    			//	} catch (InterruptedException e) {
+   					// TODO Auto-generated catch block
+    		//			e.printStackTrace();
+   			//	}
+                     //   pause();
+    					System.out.println(Thread.currentThread().getName() + " ACCELERANT PROPULSOR " + number);
+    					Main.printRocket(currentRocket);
+    					//resume();
+    				//	counter++;
+    		     //   } 
+    				
     				//pause();
     				
     			}
@@ -135,11 +159,28 @@ public class Thruster implements Runnable {
     			if (currentPower > desiredPower && currentPower > 0) {
     				//resume();
     				currentPower--;
-    				System.out.println("DESACCELERANT PROPULSOR " + number);
-    				Main.printRocket(currentRocket);
+    				
+    			//	synchronized(this) 
+    		     //   { 
+    		            // synchronizing the snd object 
+    			//		try {
+    			//		Thread.sleep(1000);
+    					
+    			//	} catch (InterruptedException e) {
+   					// TODO Auto-generated catch block
+    		//			e.printStackTrace();
+   			//	}
+    				
+    					System.out.println(Thread.currentThread().getName() + " DESACCELERANT PROPULSOR " + number);
+    					Main.printRocket(currentRocket);
+    				//	counter++;
+    		    //    } 
     				//pause();
     				
     			}
+    		//	if (currentPower == desiredPower) {
+    		//		counter = 0;
+    		//	}
     			
     			//pause();
     			
