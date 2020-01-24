@@ -16,12 +16,13 @@ public class Rocket {
    int surplusPower;
 int objectiveSpeed;
 int currentSpeed;
-int maximumSpeed;
+double maximumSpeed;
 
 
 
 
 	public int getTotalPotentialPower() {
+		totalPotentialPower=0;
 		for (int i=0; i<thrusters.size(); i++) {
 			   totalPotentialPower += thrusters.get(i).getMaxPower();
 			}
@@ -32,8 +33,8 @@ public void setTotalPotentialPower(int totalPotentialPower) {
 	this.totalPotentialPower = totalPotentialPower;
 }
 
-	public int getMaximumSpeed() {
-	maximumSpeed= 100*((int) Math.pow(this.getTotalPotentialPower(), 1/2));
+	public double getMaximumSpeed() {
+	maximumSpeed= 100*(Math.sqrt(this.getTotalPotentialPower()));
 	//(int) Math.pow(this.getTotalPotentialPower(), 1/2);
 	return maximumSpeed;
 }
@@ -170,16 +171,17 @@ public void setTotalDesiredPower(int totalDesiredPower) {
 	public void accelera() {
 		
 		surplusPower = 0;
-		notFulfilledPower = 0;
+		//notFulfilledPower = 0;
+		//totalPotentialPower = 0;
 		//PUJA POTENCIA TOTAL
-		while (totalDesiredPower != notFulfilledPower) {
-			if (totalDesiredPower > notFulfilledPower) {
-				notFulfilledPower++;
-			} else { // totalDesiredPower < notFulfilledPower
-				notFulfilledPower--;
-			}
-
-		}
+		/*
+		 * while (totalDesiredPower != notFulfilledPower) { if (totalDesiredPower >
+		 * notFulfilledPower) { notFulfilledPower++; } else { // totalDesiredPower <
+		 * notFulfilledPower notFulfilledPower--; }
+		 * 
+		 * }
+		 */
+		notFulfilledPower = totalDesiredPower;
 		//REPARTEIX POTENCIA ENTRE PROPULSORS:
 		//int[] desiredPowers = new int[this.getThrusters().size()];
 		 for (int i=0; i<thrusters.size(); i ++) {
@@ -193,10 +195,12 @@ public void setTotalDesiredPower(int totalDesiredPower) {
 				 
 				 if (i==thrusters.size()-1) {
 					 if (notFulfilledPower > 0) {
-
+						
 						 System.out.println("No s'ha pogut accelerar fins la velocitat indicada per falta de potència");
 
 						 System.out.println("Ha faltat potència: " + notFulfilledPower);
+
+						 System.out.println("Velocitat màxima aconseguida: " + (double)Math.round(getMaximumSpeed() * 100d) / 100d);
 					 }
 				 }
 				 

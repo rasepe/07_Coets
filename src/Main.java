@@ -138,7 +138,7 @@ public class Main {
 		if (totalDesiredPower < chosenRocket.getTotalPotentialPower()) {
 			chosenRocket.setCurrentSpeed(chosenRocket.getObjectiveSpeed());
 		} else {
-			chosenRocket.setCurrentSpeed(chosenRocket.getMaximumSpeed());
+			chosenRocket.setCurrentSpeed((int) chosenRocket.getMaximumSpeed());
 		}
 		
 			/*
