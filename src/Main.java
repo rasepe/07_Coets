@@ -8,22 +8,7 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 		List<Rocket> rockets = new ArrayList<Rocket>();
 		boolean firstTime = true;
-		/*
-		 * Realitza els següents passos:
-		 * 
-		 * Creem dos coets amb els codis “x” I “LDSFJA32”. El primer coet tindrà tres
-		 * propulsors i el segon sis propulsors.
-		 * 
-		 * Mostrar a pantalla el codi dels coets i el número de propulsors que té.
-		 */
 
-
-
-		/*
-		 * Creem dos coets amb els codis “32WESSDS” I “LDSFJA32”. El primer coet tindrà
-		 * tres propulsors (potència: 10,30,80) i el segon sis propulsors (potència:
-		 * 30,40,50,50,30,10)
-		 */
 		Rocket r1;
 		Rocket r2;
 		Rocket r3;
@@ -46,41 +31,22 @@ public class Main {
 		rockets.add(r2);
 		r3 = new Rocket ("XXXXXXXX", integers3);
 		rockets.add(r3);
-		//public Rocket(String code, int thrustersAmount, List<Integer> maxPowers)
 
-		/*
-		 * Mostrar a pantalla el codi dels coets, el número de propulsors que té i la
-		 * potència màxima de cada propulsor.
-		 */
 		boolean finish = false;
-		//boolean firstTime = true;
+
 		Rocket chosenRocket;
-		//int[] vegades = new int[rockets.size()];
-		//int counter = 0;
+
 		
 		int totalDesiredPower;
 		
 		
 		
-		//prova
-		
-	//	r1.accelera(List<Thruster> thrusters, List<Integer> potenciesObjectiu);
-		
+	
 		
 		
 	while (!finish) {
 		
 
-		//PAUSA TOTS ELS PROPULSORS
-		
-			/*
-			 * for (int i=0; i<rockets.size(); i++) { for (int j=0;
-			 * j<rockets.get(i).getThrusters().size(); j++ ) {
-			 * rockets.get(i).getThrusters().get(j).pause(); }
-			 * 
-			 * 
-			 * }
-			 */
 		if (!firstTime) {
 		
 		try {
@@ -92,54 +58,93 @@ public class Main {
 		}
 		}
 		
-		//counter = 0;
 
 		
-		System.out.println("Escull un coet");
+	//	System.out.println("Escull un coet");
 		
 		for (int i=0; i<rockets.size(); i++) {
 			System.out.print((i+1)+". ");
 			printRocket(rockets.get(i));
-			
+			System.out.println("Velocitat actual del coet " + (i+1) + "?");
+			rockets.get(i).setCurrentSpeed(sc.nextInt());
+			System.out.println("La velocitat actual del coet " + (i+1) + " és " + rockets.get(i).getCurrentSpeed());
 		}
 		
 		
 		
-		int option = sc.nextInt();
-		chosenRocket = rockets.get(option-1);
+	//	int option = sc.nextInt();
+	//	chosenRocket = rockets.get(option-1);
 		
-	//	System.out.println("Velocitat objectiu?");
-	//	chosenRocket.setDesiredSpeed(sc.nextInt());
 		
-	//	totalPower = (int) Math.pow((chosenRocket.getDesiredSpeed()-chosenRocket.getCurrentSpeed())/100, 2);
 		
-	//	chosenRocket.setTotalPower(totalPower);
-	    
-	//	int[] desiredPowers = new int[chosenRocket.getThrusters().size()];
-		
-		// PREGUNTA POTENCIA TOTAL (PROVISIONAL)
-	//	System.out.println("Potència total?");
-	//	totalDesiredPower = sc.nextInt();
-	//	chosenRocket.setTotalDesiredPower(totalDesiredPower);
-	//	chosenRocket.accelera(); 
+
 		
 		// PREGUNTA VELOCITAT
-		System.out.println("La velocitat actual és " + chosenRocket.getCurrentSpeed());
-		System.out.println("Velocitat desitjada?");
-		chosenRocket.setObjectiveSpeed(sc.nextInt());
 		
-		totalDesiredPower =  (int) Math.pow(((chosenRocket.getObjectiveSpeed())/100),2);
-	
-		chosenRocket.setTotalDesiredPower(totalDesiredPower);
-		chosenRocket.accelera(); 
+
+		//System.out.println("Velocitat desitjada?");
+		//chosenRocket.setObjectiveSpeed(sc.nextInt());
+		sc.nextLine();
+		System.out.println("prem intro per accelerar tres cops");
+		sc.nextLine();
+		
+			//for (int j=0; j<rockets.size(); j++) {
+				
+		for (int i=0; i<rockets.size(); i++) {
+			for (int j=0; j<3; j++) {
+				rockets.get(i).accelerate();
+				try {
+					Thread.sleep(1000);		
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+					}
+			}
+		}
+		
+			
+	//	}
+		
+		try {
+			Thread.sleep(2000);		
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+			}
+		for (int j=0; j<rockets.size(); j++) {
+			printRocket(rockets.get(j));
+		}
+
+		//sc.next();
+		System.out.println("prem intro per mostrar velocitats");
+		sc.nextLine();
+		
+		
+		//recalcula velocitat actual i la mostra
+		
+		for (int i=0; i<rockets.size(); i++) {
+			rockets.get(i).setCurrentSpeed(rockets.get(i).getCurrentSpeed()+(100*Math.sqrt(rockets.get(i).getTotalUsedPower())));
+			System.out.println((i+1) + ". Coet " + rockets.get(i).getCode() + ", velocitat: " + Math.round(rockets.get(i).getCurrentSpeed() * 100d) / 100d);
+		}
+		
+		// **************FALTEN PUNTS 6 A 9
+		
+		
+		//totalDesiredPower =  (int) Math.pow(((chosenRocket.getObjectiveSpeed()-chosenRocket.getCurrentSpeed())/100),2);
+	    
+		
+		//chosenRocket.setTotalDesiredPower(totalDesiredPower);
+		//chosenRocket.accelera(); 
 		
 		// RECALCULA VELOCITAT ACTUAL
 		
-		if (totalDesiredPower < chosenRocket.getTotalPotentialPower()) {
-			chosenRocket.setCurrentSpeed(chosenRocket.getObjectiveSpeed());
-		} else {
-			chosenRocket.setCurrentSpeed((int) chosenRocket.getMaximumSpeed());
-		}
+		//if (totalDesiredPower < chosenRocket.getTotalPotentialPower()) {
+		//	chosenRocket.setCurrentSpeed(chosenRocket.getObjectiveSpeed());
+		//} else {
+		//	chosenRocket.setCurrentSpeed((int) chosenRocket.getMaximumSpeed());
+		//}
+		
+		
 		
 			/*
 			 * //PREGUNTA POTENCIES OBJECTIU

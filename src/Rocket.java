@@ -12,14 +12,23 @@ public class Rocket {
 	int totalPotentialPower = 0;
    int totalDesiredPower;
    int missingPower = 0;
-   int totalUsedPower;
+   int totalUsedPower = 0;
    int surplusPower;
 int objectiveSpeed;
-int currentSpeed;
+double currentSpeed;
 double maximumSpeed;
 
 
 
+
+
+	public int getTotalUsedPower() {
+	return totalUsedPower;
+}
+
+public void setTotalUsedPower(int totalUsedPower) {
+	this.totalUsedPower = totalUsedPower;
+}
 
 	public int getTotalPotentialPower() {
 		totalPotentialPower=0;
@@ -34,7 +43,7 @@ public void setTotalPotentialPower(int totalPotentialPower) {
 }
 
 	public double getMaximumSpeed() {
-	maximumSpeed= 100*(Math.sqrt(this.getTotalPotentialPower()));
+	maximumSpeed=this.getCurrentSpeed() + 100*(Math.sqrt(this.getTotalPotentialPower()));
 	//(int) Math.pow(this.getTotalPotentialPower(), 1/2);
 	return maximumSpeed;
 }
@@ -51,12 +60,12 @@ public void setObjectiveSpeed(int objectiveSpeed) {
 	this.objectiveSpeed = objectiveSpeed;
 }
 
-public int getCurrentSpeed() {
+public double getCurrentSpeed() {
 	return currentSpeed;
 }
 
-public void setCurrentSpeed(int currentSpeed) {
-	this.currentSpeed = currentSpeed;
+public void setCurrentSpeed(double d) {
+	this.currentSpeed = d;
 }
 
 	public int getTotalDesiredPower() {
@@ -236,6 +245,41 @@ public void setTotalDesiredPower(int totalDesiredPower) {
 		 }
 		 }
 		comptador++;
+	}
+	
+	
+	public void accelerate() {
+		//Inicia fils si no estan oberts
+		 if (comptador == 0) {
+		for (int i=0; i < thrusters.size(); i ++) {
+			Thread t = new Thread(thrusters.get(i));
+			t.start();
+		}
+		 }
+		 comptador++;
+		 for (int i=0; i < thrusters.size(); i ++) {
+			 thrusters.get(i).setDesiredPower(thrusters.get(i).getCurrentPower()+5);
+			 totalUsedPower+=5;
+		 }
+		
+		 
+	}
+	
+	
+	public void frenar() {
+		//Inicia fils si no estan oberts
+		 if (comptador == 0) {
+		for (int i=0; i < thrusters.size(); i ++) {
+			Thread t = new Thread(thrusters.get(i));
+			t.start();
+		}
+		 }
+		 comptador++;
+		 for (int i=0; i < thrusters.size(); i ++) {
+			 thrusters.get(i).setDesiredPower(thrusters.get(i).getCurrentPower()-5);
+			 totalUsedPower-=5;
+		 }
+		
 	}
 
 	/*

@@ -133,7 +133,8 @@ public class Thruster implements Runnable {
     			//ACCELERA SI ES DONEN LES CONDICIONS
     			if (currentPower < desiredPower && currentPower < maxPower) {
     				//resume();
-    				currentPower++;
+    				currentPower += 5;//currentPower++;
+    				
     				
     			//	synchronized(this) 
     		   //     { 
@@ -146,8 +147,8 @@ public class Thruster implements Runnable {
     		//			e.printStackTrace();
    			//	}
                      //   pause();
-    					System.out.println(Thread.currentThread().getName() + " ACCELERANT PROPULSOR " + number);
-    					Main.printRocket(currentRocket);
+    					System.out.println(Thread.currentThread().getName() + " ACCELERANT PROPULSOR " + number + " DEL COET " + currentRocket.getCode() );
+    					//Main.printRocket(currentRocket);
     					//resume();
     				//	counter++;
     		     //   } 
@@ -158,7 +159,7 @@ public class Thruster implements Runnable {
     			//FRENA SI ES DONEN LES CONDICIONS
     			if (currentPower > desiredPower && currentPower > 0) {
     				//resume();
-    				currentPower--;
+    				currentPower -= 5;//currentPower--;
     				
     			//	synchronized(this) 
     		     //   { 
@@ -171,8 +172,8 @@ public class Thruster implements Runnable {
     		//			e.printStackTrace();
    			//	}
     				
-    					System.out.println(Thread.currentThread().getName() + " DESACCELERANT PROPULSOR " + number);
-    					Main.printRocket(currentRocket);
+    					System.out.println(Thread.currentThread().getName() + " DESACCELERANT PROPULSOR " + number + " DEL COET " + currentRocket.getCode());
+    					//Main.printRocket(currentRocket);
     				//	counter++;
     		    //    } 
     				//pause();
