@@ -133,7 +133,7 @@ public class Thruster implements Runnable {
     			//ACCELERA SI ES DONEN LES CONDICIONS
     			if (currentPower < desiredPower && currentPower < maxPower) {
     				//resume();
-    				currentPower += 5;//currentPower++;
+    				currentPower += 1;//currentPower++;
     				
     				
     			//	synchronized(this) 
@@ -148,6 +148,7 @@ public class Thruster implements Runnable {
    			//	}
                      //   pause();
     					System.out.println(Thread.currentThread().getName() + " ACCELERANT PROPULSOR " + number + " DEL COET " + currentRocket.getCode() );
+    					currentRocket.setTotalUsedPower(currentRocket.getTotalUsedPower()+1);
     					//Main.printRocket(currentRocket);
     					//resume();
     				//	counter++;
@@ -159,7 +160,7 @@ public class Thruster implements Runnable {
     			//FRENA SI ES DONEN LES CONDICIONS
     			if (currentPower > desiredPower && currentPower > 0) {
     				//resume();
-    				currentPower -= 5;//currentPower--;
+    				currentPower -= 1;//currentPower--;
     				
     			//	synchronized(this) 
     		     //   { 
@@ -173,11 +174,13 @@ public class Thruster implements Runnable {
    			//	}
     				
     					System.out.println(Thread.currentThread().getName() + " DESACCELERANT PROPULSOR " + number + " DEL COET " + currentRocket.getCode());
+    					currentRocket.setTotalUsedPower(currentRocket.getTotalUsedPower()-1);
     					//Main.printRocket(currentRocket);
     				//	counter++;
     		    //    } 
     				//pause();
     				
+    			} 
     			}
     		//	if (currentPower == desiredPower) {
     		//		counter = 0;
@@ -214,12 +217,13 @@ public class Thruster implements Runnable {
     		}
             
         }
-    }
+    
 
     public void stop() {
         running = false;
         // you might also want to interrupt() the Thread that is 
         // running this Runnable, too, or perhaps call:
+       // System.out.println("Interromput fil" + Thread.currentThread().getName());
         resume();
         // to unblock
     }

@@ -6,7 +6,7 @@ public class Rocket {
 //int thrustersAmount;
 	List<Thruster> thrusters = new ArrayList<Thruster>();
 	List<Integer> maxPowers = new ArrayList<Integer>();
-	int comptador = 0;
+	boolean firstTime = true;
     //int currentSpeed = 0;
   //  int desiredSpeed;
 	int totalPotentialPower = 0;
@@ -236,7 +236,7 @@ public void setTotalDesiredPower(int totalDesiredPower) {
 		 }
 		 
 		 //si comptador = 0, inicialitza fils
-		 if (comptador == 0) {
+		 if (firstTime == true) {
 		 for (int i=0; i<thrusters.size(); i ++) {
 		
 				Thread t = new Thread(thrusters.get(i));
@@ -244,43 +244,63 @@ public void setTotalDesiredPower(int totalDesiredPower) {
 			
 		 }
 		 }
-		comptador++;
+		 firstTime = false;
 	}
 	
 	
 	public void accelerate() {
 		//Inicia fils si no estan oberts
-		 if (comptador == 0) {
+		 if (firstTime == true) {
 		for (int i=0; i < thrusters.size(); i ++) {
 			Thread t = new Thread(thrusters.get(i));
 			t.start();
+			
 		}
+		Main.sleep(1000);
+		firstTime = false;
 		 }
-		 comptador++;
-		 for (int i=0; i < thrusters.size(); i ++) {
-			 thrusters.get(i).setDesiredPower(thrusters.get(i).getCurrentPower()+5);
-			 totalUsedPower+=5;
-		 }
-		
+	
 		 
+		 for (int i=0; i < thrusters.size(); i ++) {
+			 thrusters.get(i).setDesiredPower(thrusters.get(i).getCurrentPower()+1);
+			 //totalUsedPower+=1;
+		 }
+		 Main.sleep(1000);
+			
+	//	System.out.println("Fi accelerar");
+	//	Main.printRocket(this);
 	}
 	
 	
-	public void frenar() {
+	public void deaccelerate() {
+		
 		//Inicia fils si no estan oberts
-		 if (comptador == 0) {
+		 if (firstTime == true) {
 		for (int i=0; i < thrusters.size(); i ++) {
 			Thread t = new Thread(thrusters.get(i));
 			t.start();
 		}
+		Main.sleep(1000);
+		firstTime = false;
 		 }
-		 comptador++;
+		 
+		 
+		 
 		 for (int i=0; i < thrusters.size(); i ++) {
-			 thrusters.get(i).setDesiredPower(thrusters.get(i).getCurrentPower()-5);
-			 totalUsedPower-=5;
+			 if (thrusters.get(i).getCurrentPower()>0) {
+			 thrusters.get(i).setDesiredPower(thrusters.get(i).getCurrentPower()-1);
+			// totalUsedPower-=1;
+			 }
 		 }
+		 
+		 Main.sleep(1000);
 		
+		// System.out.println("Fi desaccelerar");
+		// Main.printRocket(this);
 	}
+	
+	
+	
 
 	/*
 	 * NO NECESSARI public void desaccelera(List<Thruster> thrusters) { for (int
