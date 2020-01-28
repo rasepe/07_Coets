@@ -4,7 +4,7 @@ public class Thruster implements Runnable {
 	private final Object pauseLock = new Object();
 	private int maxPower;
 	private int currentPower; 
-	private int desiredPower;
+	private double desiredPower;
 	private Rocket currentRocket;
 	private int number;
 	private int counter;
@@ -34,12 +34,12 @@ public class Thruster implements Runnable {
 		this.currentPower = currentPower;
 	}
 
-	public int getDesiredPower() {
+	public double getDesiredPower() {
 		return desiredPower;
 	}
 
-	public void setDesiredPower(int desiredPower) {
-		this.desiredPower = desiredPower;
+	public void setDesiredPower(double d) {
+		this.desiredPower = d;
 	}
 
 
