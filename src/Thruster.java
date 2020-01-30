@@ -4,16 +4,16 @@ public class Thruster implements Runnable {
 	private final Object pauseLock = new Object();
 	private int maxPower;
 	private int currentPower; 
-	private double desiredPower;
+	private int neededPower;
 	private Rocket currentRocket;
 	private int number;
-	private int counter;
+	private int counter=0;
 
 	public Thruster(int maxPower, Rocket currentRocket, int number) {
 		super();
 		this.maxPower = maxPower;
 		this.currentPower = 0;
-		this.desiredPower = 0;
+		this.neededPower = 0;
 		this.currentRocket = currentRocket;
 		this.number = number;
 	}
@@ -34,12 +34,12 @@ public class Thruster implements Runnable {
 		this.currentPower = currentPower;
 	}
 
-	public double getDesiredPower() {
-		return desiredPower;
+	public int getNeededPower() {
+		return neededPower;
 	}
 
-	public void setDesiredPower(double d) {
-		this.desiredPower = d;
+	public void setNeededPower(int d) {
+		this.neededPower = d;
 	}
 
 
@@ -97,25 +97,28 @@ public class Thruster implements Runnable {
 
 			while (!finished) {
 				//ACCELERA SI ES DONEN LES CONDICIONS
-				if (currentPower < desiredPower && currentPower < maxPower) {
+				if (currentPower < neededPower && currentPower < maxPower) {
 
-					currentPower += 1;
-
+					currentPower ++;
 					System.out.println(Thread.currentThread().getName() + " ACCELERANT PROPULSOR " + number + " DEL COET " + currentRocket.getCode() );
 					currentRocket.setTotalUsedPower(currentRocket.getTotalUsedPower()+1);
-
+					
+					/*
+					 * try { Thread.sleep(1000); } catch (InterruptedException e) { // TODO
+					 * Auto-generated catch block e.printStackTrace(); }
+					 */
 
 				}
 				//FRENA SI ES DONEN LES CONDICIONS
-				if (currentPower > desiredPower && currentPower > 0) {
+				if (currentPower > neededPower && currentPower > 0) {
 
-					currentPower -= 1;
-
-
-
+					currentPower--;
 					System.out.println(Thread.currentThread().getName() + " DESACCELERANT PROPULSOR " + number + " DEL COET " + currentRocket.getCode());
 					currentRocket.setTotalUsedPower(currentRocket.getTotalUsedPower()-1);
-
+					/*
+					 * try { Thread.sleep(1000); } catch (InterruptedException e) { // TODO
+					 * Auto-generated catch block e.printStackTrace(); }
+					 */
 
 				} 
 			}

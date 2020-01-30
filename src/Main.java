@@ -41,6 +41,7 @@ public class Main {
 		System.out.println("Escull una opció:");
 		System.out.println("1. Exercici antic");
 		System.out.println("2. Exercici nou");
+		System.out.println("3. Sortir");
 		
 		option = sc.nextInt();
 		
@@ -48,7 +49,10 @@ public class Main {
 		case 1:
 			exerciciAntic(sc, rockets);
 		case 2:
-		    exerciciNou(sc, rockets);		    
+		    exerciciNou(sc, rockets);
+			/*
+			 * default: sc.close(); System.exit(0);
+			 */
 		}
 
 		
@@ -57,21 +61,14 @@ public class Main {
 	private static void exerciciNou(Scanner sc, List<Rocket> rockets) {
 		Rocket chosenRocket;
 		double desiredSpeed;
-		// TODO Auto-generated method stub
-		//PREGUTAR VELOCITATS INICIALS
-		for (int i=0; i<rockets.size(); i++) {
-			System.out.println("Velocitat inicial del coet " + (i+1) + "?");
-			rockets.get(i).setCurrentSpeed(sc.nextInt());
 
-			System.out.println("La velocitat inicial del coet " + (i+1) + " és " +
-					rockets.get(i).getCurrentSpeed()); }
-
-		sc.nextLine();
-		//ESCULL UN COHET
+		//ESCULL UN COET
 		printRockets(rockets);
 		System.out.println("Escull un coet");
 		chosenRocket = rockets.get(sc.nextInt()-1);
-		System.out.println("La velocitat actual del coet és " + chosenRocket.getCurrentSpeed());
+		System.out.println("velocitat inicial?");
+		chosenRocket.setCurrentSpeed(sc.nextInt());
+		//System.out.println("La velocitat actual del coet és " + chosenRocket.getCurrentSpeed());
 		System.out.println("Velocitat objectiu?");
 		desiredSpeed = sc.nextDouble();
 		
@@ -82,6 +79,8 @@ public class Main {
 
 		sc.close();
 		System.exit(0);
+
+		
 		
 	}
 
