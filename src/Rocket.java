@@ -164,7 +164,7 @@ public class Rocket {
 		Main.sleep(1000);
 	}
 
-	//See also methods accelerate() and deccelerate()
+	//See also methods accelerate() and decelerate()
 	public void accelerate(double currentSpeed, double neededSpeed) {
 		setTotalUsedPower(0);
 		//Initialize threads if they were not open before
