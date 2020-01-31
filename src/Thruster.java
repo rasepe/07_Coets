@@ -7,7 +7,6 @@ public class Thruster implements Runnable {
 	private int neededPower;
 	private Rocket currentRocket;
 	private int number;
-	private int counter=0;
 
 	public Thruster(int maxPower, Rocket currentRocket, int number) {
 		super();
@@ -21,43 +20,43 @@ public class Thruster implements Runnable {
 	public int getMaxPower() {
 		return maxPower;
 	}
-
-	public void setMaxPower(int maxPower) {
-		this.maxPower = maxPower;
-	}
-
+	//
+	//	public void setMaxPower(int maxPower) {
+	//		this.maxPower = maxPower;
+	//	}
+	//
 	public int getCurrentPower() {
 		return currentPower;
 	}
+	//
+	//	public void setCurrentPower(int currentPower) {
+	//		this.currentPower = currentPower;
+	//	}
 
-	public void setCurrentPower(int currentPower) {
-		this.currentPower = currentPower;
-	}
-
-	public int getNeededPower() {
-		return neededPower;
-	}
-
+	//	public int getNeededPower() {
+	//		return neededPower;
+	//	}
+	//
 	public void setNeededPower(int d) {
 		this.neededPower = d;
 	}
 
 
-	public int getCounter() {
-		return counter;
-	}
-
-	public void setCounter(int counter) {
-		this.counter = counter;
-	}
-
-	public int getNumber() {
-		return number;
-	}
-
-	public void setNumber(int number) {
-		this.number = number;
-	}
+	//	public int getCounter() {
+	//		return counter;
+	//	}
+	//
+	//	public void setCounter(int counter) {
+	//		this.counter = counter;
+	//	}
+	//
+	//	public int getNumber() {
+	//		return number;
+	//	}
+	//
+	//	public void setNumber(int number) {
+	//		this.number = number;
+	//	}
 
 
 
@@ -96,16 +95,16 @@ public class Thruster implements Runnable {
 
 
 			while (!finished) {
-				//ACCELERA SI ES DONEN LES CONDICIONS
+				//ACCELERATE WHEN GIVEN THE CONDITIONS
 				if (currentPower < neededPower && currentPower < maxPower) {
 
 					currentPower ++;
 					System.out.println(Thread.currentThread().getName() + " ACCELERANT PROPULSOR " + number + " DEL COET " + currentRocket.getCode() );
 					currentRocket.setTotalUsedPower(currentRocket.getTotalUsedPower()+1);
-					
+
 
 				}
-				//FRENA SI ES DONEN LES CONDICIONS
+				//DEACCELERATE WHEN GIVEN THE CONDITIONS
 				if (currentPower > neededPower && currentPower > 0) {
 
 					currentPower--;
@@ -141,7 +140,7 @@ public class Thruster implements Runnable {
 		}
 	}
 };
-	
+
 	
 
 
