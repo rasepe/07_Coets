@@ -7,11 +7,11 @@ public class Main {
 	public static void main(String[] args) { 
 		Scanner sc = new Scanner(System.in);
 		int option;
-		
+
 		//1. Creem dos coets amb els codis “32WESSDS” I “LDSFJA32”. 
 		//El primer coet tindrà tres propulsors (potència màxima: 10,30,80) 
 		//i el segon sis propulsors (potència màxima: 30,40,50,50,30,10).
-		
+
 		List<Rocket> rockets = new ArrayList<Rocket>();
 
 		Rocket r1;
@@ -35,27 +35,27 @@ public class Main {
 		rockets.add(r1);
 		r2 = new Rocket ("LDSFJA32", thrusters2);
 		rockets.add(r2);
-		
-		
-		
+
+
+
 		System.out.println("Escull una opció:");
-		System.out.println("1. Exercici antic");
-		System.out.println("2. Exercici nou");
+		System.out.println("1. Exercici nou fase 4");
+		System.out.println("2. Exercici antic fase 4");
 		System.out.println("3. Sortir");
-		
+
 		option = sc.nextInt();
-		
+
 		switch (option) {
 		case 1:
-			exerciciAntic(sc, rockets);
+			exerciciNou(sc, rockets);
 		case 2:
-		    exerciciNou(sc, rockets);
+			exerciciAntic(sc, rockets);
 			/*
 			 * default: sc.close(); System.exit(0);
 			 */
 		}
 
-		
+
 	}
 
 	private static void exerciciNou(Scanner sc, List<Rocket> rockets) {
@@ -71,119 +71,119 @@ public class Main {
 		//System.out.println("La velocitat actual del coet és " + chosenRocket.getCurrentSpeed());
 		System.out.println("Velocitat objectiu?");
 		desiredSpeed = sc.nextDouble();
-		
+
 		chosenRocket.accelerate(chosenRocket.getCurrentSpeed(), desiredSpeed);
-		
-		
+
+
 		System.out.println("FI DEL PROGRAMA");
 
 		sc.close();
 		System.exit(0);
 
-		
-		
+
+
 	}
 
 	private static void exerciciAntic(Scanner sc, List<Rocket> rockets) {
 		// TODO Auto-generated method stub
-		
+
 		//1. Creem dos coets amb els codis “32WESSDS” I “LDSFJA32”. 
-				//El primer coet tindrà tres propulsors (potència màxima: 10,30,80) 
-				//i el segon sis propulsors (potència màxima: 30,40,50,50,30,10).
+		//El primer coet tindrà tres propulsors (potència màxima: 10,30,80) 
+		//i el segon sis propulsors (potència màxima: 30,40,50,50,30,10).
 		//createRockets();
-		
+
 		//2. Mostrar a pantalla el codi dels coets, 
-				//el número de propulsors que té i la potència màxima de cada propulsor.
-		
-				printRockets(rockets);
+		//el número de propulsors que té i la potència màxima de cada propulsor.
 
-				//3. Mostrar a pantalla la velocitat actual dels coets (HEM AFEGIT PAS PREVI,
-				//PREGUTAR VELOCITATS INICIALS
-				for (int i=0; i<rockets.size(); i++) {
-					System.out.println("Velocitat inicial del coet " + (i+1) + "?");
-					rockets.get(i).setCurrentSpeed(sc.nextInt());
+		printRockets(rockets);
 
-					System.out.println("La velocitat inicial del coet " + (i+1) + " és " +
-							rockets.get(i).getCurrentSpeed()); }
+		//3. Mostrar a pantalla la velocitat actual dels coets (HEM AFEGIT PAS PREVI,
+		//PREGUTAR VELOCITATS INICIALS
+		for (int i=0; i<rockets.size(); i++) {
+			System.out.println("Velocitat inicial del coet " + (i+1) + "?");
+			rockets.get(i).setCurrentSpeed(sc.nextInt());
 
-				sc.nextLine();
-				System.out.println("prem intro per mostrar velocitats actuals");
-				sc.nextLine(); 
-				showSpeed(rockets);
+			System.out.println("La velocitat inicial del coet " + (i+1) + " és " +
+					rockets.get(i).getCurrentSpeed()); }
 
-				//4.Accelerar amb els coets tres cops
+		sc.nextLine();
+		System.out.println("prem intro per mostrar velocitats actuals");
+		sc.nextLine(); 
+		showSpeed(rockets);
 
-				System.out.println("prem intro per accelerar tres cops"); sc.nextLine();
+		//4.Accelerar amb els coets tres cops
 
-				for (int i=0; i<rockets.size(); i++) {
-					sleep(2000);
-					for (int j=0; j<3; j++) {
-						rockets.get(i).accelerate(); 
-						//	rockets.get(i).accelerate();
-						//	rockets.get(i).accelerate();
-					}
-				}
+		System.out.println("prem intro per accelerar tres cops"); sc.nextLine();
 
-				sleep(2000);
+		for (int i=0; i<rockets.size(); i++) {
+			sleep(2000);
+			for (int j=0; j<3; j++) {
+				rockets.get(i).accelerate(); 
+				//	rockets.get(i).accelerate();
+				//	rockets.get(i).accelerate();
+			}
+		}
 
-				printRockets(rockets);
+		sleep(2000);
 
-				//5.Mostrar a pantalla la velocitat actual
+		printRockets(rockets);
 
-				System.out.println("prem intro per mostrar velocitats"); sc.nextLine();
+		//5.Mostrar a pantalla la velocitat actual
 
-				showSpeed(rockets);
+		System.out.println("prem intro per mostrar velocitats"); sc.nextLine();
 
-				//6.Frenar cinc cops amb el primer coet (“32WESSDS”) i accelerar set amb el segon coet.
+		showSpeed(rockets);
 
-				System.out.println("prem intro per frenar cinc cops amb el primer coet "
-						+ "(“32WESSDS”) i accelerar set amb el segon coet"); 
-				sc.nextLine();
+		//6.Frenar cinc cops amb el primer coet (“32WESSDS”) i accelerar set amb el segon coet.
+
+		System.out.println("prem intro per frenar cinc cops amb el primer coet "
+				+ "(“32WESSDS”) i accelerar set amb el segon coet"); 
+		sc.nextLine();
 
 
-				for (int j=0; j<5; j++) { 
-					rockets.get(0).decelerate();
-				} 
+		for (int j=0; j<5; j++) { 
+			rockets.get(0).decelerate();
+		} 
 
-				for (int j=0; j<7; j++) { 
-					rockets.get(1).accelerate();
-				} 
+		for (int j=0; j<7; j++) { 
+			rockets.get(1).accelerate();
+		} 
 
-				sleep(2000);
+		sleep(2000);
 
-				printRockets(rockets);
+		printRockets(rockets);
 
-				//7.Mostrar a pantalla la velocitat actual
+		//7.Mostrar a pantalla la velocitat actual
 
-				System.out.println("prem intro per mostrar velocitats"); sc.nextLine();
-				showSpeed(rockets);
+		System.out.println("prem intro per mostrar velocitats"); sc.nextLine();
+		showSpeed(rockets);
 
-				//8.Accelerar 15 cops amb els dos coets.
+		//8.Accelerar 15 cops amb els dos coets.
 
-				System.out.println("prem intro per accelerar 15 cops amb els dos coets");
-				sc.nextLine();
+		System.out.println("prem intro per accelerar 15 cops amb els dos coets");
+		sc.nextLine();
 
-				for (int i=0; i<rockets.size(); i++) {
-					for (int j=0; j<15; j++) {
-						rockets.get(i).accelerate();
-						//sleep(1000);
-					}
-				}
+		for (int i=0; i<rockets.size(); i++) {
+			for (int j=0; j<15; j++) {
+				rockets.get(i).accelerate();
+				//sleep(1000);
+			}
+		}
 
-				sleep(2000);
+		sleep(2000);
 
-				printRockets(rockets);
+		printRockets(rockets);
 
-				//9. Mostrar a pantalla la velocitat actual
+		//9. Mostrar a pantalla la velocitat actual
 
-				System.out.println("prem intro per mostrar velocitats");
-				sc.nextLine();
-				showSpeed(rockets);
+		System.out.println("prem intro per mostrar velocitats");
+		sc.nextLine();
+		showSpeed(rockets);
 
-				System.out.println("FI DEL PROGRAMA");
+		System.out.println("FI DEL PROGRAMA");
 
-				sc.close();
-				System.exit(0);
+		sc.close();
+		System.exit(0);
 	}
 
 

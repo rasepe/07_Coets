@@ -103,10 +103,6 @@ public class Thruster implements Runnable {
 					System.out.println(Thread.currentThread().getName() + " ACCELERANT PROPULSOR " + number + " DEL COET " + currentRocket.getCode() );
 					currentRocket.setTotalUsedPower(currentRocket.getTotalUsedPower()+1);
 					
-					/*
-					 * try { Thread.sleep(1000); } catch (InterruptedException e) { // TODO
-					 * Auto-generated catch block e.printStackTrace(); }
-					 */
 
 				}
 				//FRENA SI ES DONEN LES CONDICIONS
@@ -115,10 +111,7 @@ public class Thruster implements Runnable {
 					currentPower--;
 					System.out.println(Thread.currentThread().getName() + " DESACCELERANT PROPULSOR " + number + " DEL COET " + currentRocket.getCode());
 					currentRocket.setTotalUsedPower(currentRocket.getTotalUsedPower()-1);
-					/*
-					 * try { Thread.sleep(1000); } catch (InterruptedException e) { // TODO
-					 * Auto-generated catch block e.printStackTrace(); }
-					 */
+
 
 				} 
 			}
