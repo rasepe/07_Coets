@@ -21,6 +21,22 @@ public class Rocket {
 	int thrusterPower = 0;
 	Scanner sc = new Scanner(System.in);
 
+	//CONSTRUCTOR:
+	public Rocket(String code, List<Integer> maxPowers) {
+		super();
+		this.code = code;
+
+		this.maxPowers = maxPowers;
+		for (int i = 0; i < maxPowers.size(); i++) {
+
+			Thruster thruster = new Thruster(maxPowers.get(i), this, i+1);
+
+			thrusters.add(thruster);
+		}
+
+	}
+
+	//GETTERS & SETTERS:
 	public int getCounter() {
 		return counter;
 	}
@@ -32,10 +48,6 @@ public class Rocket {
 	public List<Integer> getNeededPowers() {
 		return neededPowers;
 	}
-
-	//	public void setNeededPowers(List<Integer> neededPowers) {
-	//		this.neededPowers = neededPowers;
-	//	}
 
 	public int getTotalUsedPower() {
 		return totalUsedPower;
@@ -53,20 +65,6 @@ public class Rocket {
 		return totalPotentialPower;
 	}
 
-	//	public void setTotalPotentialPower(int totalPotentialPower) {
-	//		this.totalPotentialPower = totalPotentialPower;
-	//	}
-
-	//	public double getMaximumSpeed() {
-	//		maximumSpeed=this.getCurrentSpeed() + 100*(Math.sqrt(this.getTotalPotentialPower()));
-	//		return maximumSpeed;
-	//	}
-
-	//	public void setMaximumSpeed(int maximumSpeed) {
-	//		this.maximumSpeed = maximumSpeed;
-	//	}
-
-
 	public double getCurrentSpeed() {
 		return currentSpeed;
 	}
@@ -83,48 +81,17 @@ public class Rocket {
 		this.totalNeededPower = d;
 	}
 
-
-
-	public Rocket(String code, List<Integer> maxPowers) {
-		super();
-		this.code = code;
-
-		this.maxPowers = maxPowers;
-		for (int i = 0; i < maxPowers.size(); i++) {
-
-			Thruster thruster = new Thruster(maxPowers.get(i), this, i+1);
-
-			thrusters.add(thruster);
-		}
-
-	}
-
 	public String getCode() {
 		return code;
 	}
-
-	//	public void setCode(String code) {
-	//		this.code = code;
-	//	}
 
 	public List<Thruster> getThrusters() {
 		return thrusters;
 	}
 
-	//	public void setThrusters(List<Thruster> thrusters) {
-	//		this.thrusters = thrusters;
-	//	}
-
-	//	public List<Integer> getMaxPowers() {
-	//		return maxPowers;
-	//	}
-
-	//	public void setMaxPowers(List<Integer> maxPowers) {
-	//		this.maxPowers = maxPowers;
-	//	}
 
 
-	//See also method accelerate(double currentSpeed, double neededSpeed)
+	//SEE ALSO: accelerate(double currentSpeed, double neededSpeed)
 	public void accelerate() {
 		//Initialize threads if they were not open before
 		if (firstTime == true) {
@@ -142,7 +109,9 @@ public class Rocket {
 		Main.sleep(1000);
 	}
 
-	//See also method accelerate(double currentSpeed, double neededSpeed)
+
+
+	//SEE ALSO: accelerate(double currentSpeed, double neededSpeed)
 	public void decelerate() {
 
 		//Initialize threads if they were not open before
@@ -164,7 +133,9 @@ public class Rocket {
 		Main.sleep(1000);
 	}
 
-	//See also methods accelerate() and decelerate()
+
+
+	//SEE ALSO: accelerate() & decelerate()
 	public void accelerate(double currentSpeed, double neededSpeed) {
 		setTotalUsedPower(0);
 		//Initialize threads if they were not open before
@@ -176,7 +147,6 @@ public class Rocket {
 			Main.sleep(1000);
 			firstTime = false;
 		}
-
 
 		setTotalNeededPower((int) (Math.pow((neededSpeed-currentSpeed)/100,2))); //Consider possibility of rounding as Math.ceil
 
@@ -214,13 +184,11 @@ public class Rocket {
 			}
 
 		} else {
-
 			execute();
-
 		}
-
-
 	}
+
+
 
 	public void execute() {
 		distributeRemainder();
@@ -270,20 +238,16 @@ public class Rocket {
 				}
 			}
 
-
-
 		}
 	}
 
-	private void distribute() {
 
+
+	private void distribute() {
 
 		for (int i=0; i<thrusters.size(); i++) {
 
-
 			thrusterPower = getNeededPowers().get(i); 
-
-
 
 			if (thrusters.get(i).getMaxPower() >= division) {
 
@@ -297,8 +261,6 @@ public class Rocket {
 
 			}
 
-
-
 		}
 
 		check(getNeededPowers());			
@@ -306,27 +268,18 @@ public class Rocket {
 	}
 
 
+
 	private void distribute2() {
 
-
 		for (int i=0; i<thrusters.size(); i++) {
-
-
 			thrusterPower = getNeededPowers().get(i); 
-
 			if (thrusterPower < thrusters.get(i).getMaxPower()) {
-
-
 				getNeededPowers().set(i,thrusterPower+division);
-
-
 			}
-
-
 		}
-
-
 	}
+
+
 
 	private void check(List<Integer> list) {
 
@@ -349,13 +302,16 @@ public class Rocket {
 
 	}
 
+
+
 	private static void showSpeed(Rocket rocket) {
 
 		//recalculates current speed and shows it on screen
 		rocket.setCurrentSpeed(rocket.getCurrentSpeed()+(100*Math.sqrt(rocket.getTotalUsedPower())));
 		System.out.println("Velocitat assolida pel coet " + rocket.getCode() + ": " + Math.round(rocket.getCurrentSpeed() * 100d) / 100d);
-
 	}
+
+
 
 	private static void printRocket(Rocket rocket) {
 
@@ -370,7 +326,5 @@ public class Rocket {
 					System.out.print(rocket.getThrusters().get(j).getMaxPower()); }
 		}
 		System.out.print("\n");
-
 	}
-
 }

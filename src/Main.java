@@ -36,8 +36,7 @@ public class Main {
 		r2 = new Rocket ("LDSFJA32", thrusters2);
 		rockets.add(r2);
 
-
-
+		//MENU
 		System.out.println("Escull una opció:");
 		System.out.println("1. Exercici nou fase 4");
 		System.out.println("2. Exercici antic fase 4");
@@ -52,8 +51,8 @@ public class Main {
 			oldExercise(sc, rockets);
 		}
 
-
 	}
+
 
 	private static void newExercise(Scanner sc, List<Rocket> rockets) {
 		Rocket chosenRocket;
@@ -75,16 +74,14 @@ public class Main {
 		sc.close();
 		System.exit(0);
 
-
-
 	}
+
 
 	private static void oldExercise(Scanner sc, List<Rocket> rockets) {
 
 		//1. Creem dos coets amb els codis “32WESSDS” I “LDSFJA32”. 
 		//El primer coet tindrà tres propulsors (potència màxima: 10,30,80) 
 		//i el segon sis propulsors (potència màxima: 30,40,50,50,30,10).
-		//createRockets();
 
 		//2. Mostrar a pantalla el codi dels coets, 
 		//el número de propulsors que té i la potència màxima de cada propulsor.
@@ -181,7 +178,6 @@ public class Main {
 	}
 
 
-
 	static void sleep(int time) {
 		try {
 			Thread.sleep(time);
@@ -190,21 +186,17 @@ public class Main {
 		}
 	}
 
+
 	private static void showSpeed(List<Rocket> rockets) {
-
 		//recalculates current speed and shows it
-
 		for (int i=0; i<rockets.size(); i++) {
 			rockets.get(i).setCurrentSpeed(rockets.get(i).getCurrentSpeed()+(100*Math.sqrt(rockets.get(i).getTotalUsedPower())));
 			System.out.println((i+1) + ". Coet " + rockets.get(i).getCode() + ", velocitat actual: " + Math.round(rockets.get(i).getCurrentSpeed() * 100d) / 100d);
 		}
-
 	}
 
 
-
 	static void printRockets(List<Rocket> rockets) {
-
 
 		for (int i=0; i<rockets.size(); i++) {
 
@@ -221,9 +213,7 @@ public class Main {
 						System.out.print(rockets.get(i).getThrusters().get(j).getMaxPower()); }
 			}
 			System.out.print("\n");
-
 		}
-
 	}
 
 
