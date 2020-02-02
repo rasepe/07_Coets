@@ -6,6 +6,7 @@ public class Thruster implements Runnable {
 	private Rocket currentRocket;
 	private int number;
 
+	//CONSTRUCTOR
 	public Thruster(int maxPower, Rocket currentRocket, int number) {
 		super();
 		this.maxPower = maxPower;
@@ -15,6 +16,7 @@ public class Thruster implements Runnable {
 		this.number = number;
 	}
 
+	//GETTERS & SETTERS
 	public int getMaxPower() {
 		return maxPower;
 	}
